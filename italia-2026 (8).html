@@ -1,0 +1,2918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Itália 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF8F3;
+    --paper: #F3EFE6;
+    --ink: #1A1714;
+    --ink-soft: #4A4540;
+    --ink-muted: #8A8480;
+    --terra: #C4622D;
+    --terra-light: #F0E0D4;
+    --gold: #B8943C;
+    --gold-light: #F5EDD6;
+    --sage: #5A7A5C;
+    --sage-light: #DCE8DC;
+    --blue: #3A6EA8;
+    --blue-light: #D8E8F5;
+    --border: rgba(26,23,20,0.10);
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(26,23,20,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ── */
+  .app-header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 3rem 1.25rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .flag-bg {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 54%;
+    display: flex;
+    pointer-events: none;
+    opacity: 0.07;
+  }
+  .flag-bg span { flex: 1; display: block; }
+  .flag-mini {
+    display: inline-flex;
+    border-radius: 3px;
+    overflow: hidden;
+    width: 28px;
+    height: 19px;
+    flex-shrink: 0;
+    margin-left: 8px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2);
+  }
+  .flag-mini span { flex: 1; display: block; }
+  .app-header::after {
+    content: 'IT';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -4px;
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #fff;
+  }
+  .header-dates {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+  }
+  .header-progress {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    white-space: nowrap;
+  }
+
+  /* ── CITY LABEL ── */
+  .city-section { margin-top: 1.5rem; }
+  .city-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 1.25rem 0.5rem;
+  }
+  .city-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .city-name {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+  .city-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* ── DAY CARD ── */
+  .day-card {
+    margin: 0 1rem 0.625rem;
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+  .day-card.open { box-shadow: 0 4px 20px rgba(26,23,20,0.12); }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.875rem 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .date-badge {
+    width: 46px;
+    height: 52px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .date-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .date-mon {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  .day-main { flex: 1; min-width: 0; }
+  .day-city-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .day-preview {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .day-tags { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .tag-hotel { background: var(--blue-light); color: var(--blue); }
+  .tag-move { background: var(--gold-light); color: var(--gold); }
+  .tag-free { background: var(--sage-light); color: var(--sage); }
+
+  .chevron {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s, background 0.2s;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .day-card.open .chevron { transform: rotate(90deg); background: var(--ink); color: #fff; }
+
+  /* ── EVENTS ── */
+  .events-panel {
+    display: none;
+    border-top: 0.5px solid var(--border);
+    background: var(--cream);
+  }
+  .day-card.open .events-panel { display: block; }
+
+  .event-row {
+    display: flex;
+    gap: 10px;
+    padding: 0.75rem 1rem;
+    border-bottom: 0.5px solid var(--border);
+    transition: background 0.15s;
+  }
+  .event-row:last-child { border-bottom: none; }
+  .event-row.done { opacity: 0.5; }
+  .event-row.done .event-title { text-decoration: line-through; }
+
+  .event-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12px;
+    padding-top: 5px;
+    flex-shrink: 0;
+  }
+  .ev-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .ev-line {
+    width: 1.5px;
+    flex: 1;
+    min-height: 14px;
+    margin-top: 3px;
+    background: var(--border);
+  }
+
+  .event-content { flex: 1; min-width: 0; }
+  .event-time {
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 2px;
+    font-weight: 400;
+  }
+  .event-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .event-desc {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    line-height: 1.45;
+  }
+  .event-pills {
+    display: flex;
+    gap: 5px;
+    margin-top: 7px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .pill {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .pill-maps { background: var(--blue-light); color: var(--blue); }
+  .pill-paid { background: var(--sage-light); color: var(--sage); }
+  .pill-owe { background: #FEF0E6; color: #C4622D; }
+  .pill-transit { background: var(--gold-light); color: var(--gold); }
+  .pill-check { background: var(--paper); color: var(--ink-soft); border: 0.5px solid var(--border); }
+  .pill-check.done { background: var(--sage-light); color: var(--sage); border-color: transparent; }
+
+  /* ── ADD ITEM ── */
+  .add-item-row {
+    padding: 0.625rem 1rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .add-item-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    background: none;
+    border: 0.5px dashed var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    -webkit-appearance: none;
+  }
+  .add-item-btn:hover { background: var(--paper); color: var(--ink); }
+  .add-item-plus { font-size: 16px; line-height: 1; font-weight: 300; }
+  .add-form {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0 4px;
+  }
+  .add-form.open { display: flex; }
+  .add-form input, .add-form select {
+    font-size: 13px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 0.5px solid var(--border);
+    background: #fff;
+    color: var(--ink);
+    width: 100%;
+    -webkit-appearance: none;
+    outline: none;
+  }
+  .add-form input:focus, .add-form select:focus {
+    border-color: var(--blue);
+  }
+  .add-form-row { display: flex; gap: 7px; }
+  .add-form-row input { flex: 1; }
+  .btn-save-item {
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+  }
+  .btn-cancel-item {
+    background: none;
+    color: var(--ink-muted);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+  }
+  .custom-event-row { position: relative; }
+  .btn-remove-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    line-height: 1;
+    opacity: 0.5;
+    -webkit-appearance: none;
+  }
+  .btn-remove-item:hover { opacity: 1; color: #C4622D; }
+
+  /* ── SPECIAL CARD (vespa, boat) ── */
+  .special-card {
+    margin: 6px 0 0;
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 12px;
+  }
+  .special-title {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .special-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+  .special-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--ink-soft);
+  }
+  .special-row:last-child { border-bottom: none; }
+  .special-row span:last-child { font-weight: 500; color: var(--ink); text-align: right; max-width: 60%; }
+
+  /* ── BOTTOM NAV ── */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(250,248,243,0.95);
+    backdrop-filter: blur(10px);
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 0;
+    cursor: pointer;
+    font-size: 10px;
+    color: var(--ink-muted);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.15s;
+  }
+  .nav-item.active { color: var(--terra); }
+  .nav-icon { font-size: 20px; line-height: 1; }
+
+  .page { display: none; padding-bottom: 80px; }
+  .page.active { display: block; }
+
+  /* ── EXTRAS PAGE ── */
+  .extras-section { padding: 1.25rem; }
+  .extras-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .extra-card {
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    box-shadow: var(--shadow);
+  }
+  .extra-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.875rem 1rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .extra-card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .extra-card-title { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .extra-card-sub { font-size: 12px; color: var(--ink-muted); margin-top: 1px; }
+  .extra-card-body { padding: 0.875rem 1rem; }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px 0;
+    border-bottom: 0.5px solid var(--border);
+    gap: 12px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-label { font-size: 12px; color: var(--ink-muted); flex-shrink: 0; }
+  .info-val { font-size: 12px; font-weight: 500; color: var(--ink); text-align: right; }
+  .info-val a { color: var(--blue); text-decoration: none; }
+  .alert-box {
+    background: #FEF0E6;
+    border-radius: 8px;
+    padding: 0.625rem 0.75rem;
+    font-size: 12px;
+    color: #7A3A1A;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* ── HOTELS PAGE ── */
+  .hotels-list { padding: 1.25rem; padding-bottom: 80px; }
+  .hotel-card {
+    background: #fff;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    box-shadow: var(--shadow);
+  }
+  .hotel-city-strip {
+    padding: 0.5rem 1rem;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hotel-body { padding: 0.625rem 1rem 0.875rem; }
+  .hotel-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; color: var(--ink); }
+  .hotel-meta { font-size: 12px; color: var(--ink-muted); margin-top: 3px; }
+  .hotel-app { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; font-size: 11px; background: var(--blue-light); color: var(--blue); padding: 3px 9px; border-radius: 20px; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="showPage('itinerary')">
+    <span class="nav-icon">🗓</span>
+    <span>Roteiro</span>
+  </div>
+  <div class="nav-item" onclick="showPage('extras')">
+    <span class="nav-icon">🛵</span>
+    <span>Reservas</span>
+  </div>
+  <div class="nav-item" onclick="showPage('hotels')">
+    <span class="nav-icon">🏨</span>
+    <span>Hotéis</span>
+  </div>
+</nav>
+
+<!-- ══ PAGE: ITINERARY ══ -->
+<div id="page-itinerary" class="page active">
+
+  <div class="app-header">
+    <div class="flag-bg" aria-hidden="true">
+      <span style="background:#009246"></span>
+      <span style="background:#fff"></span>
+      <span style="background:#CE2B37"></span>
+    </div>
+    <div class="header-eyebrow">Viagem Internacional</div>
+    <div class="header-title">Itália
+      <span class="flag-mini" aria-label="Bandeira da Itália">
+        <span style="background:#009246"></span>
+        <span style="background:#fff"></span>
+        <span style="background:#CE2B37"></span>
+      </span>
+      <br><span style="font-size:28px; opacity:0.6">2026</span>
+    </div>
+    <div class="header-dates">12 de junho → 25 de junho · 14 dias</div>
+    <div class="header-progress">
+      <div class="progress-track"><div class="progress-fill" id="pbar"></div></div>
+      <div class="progress-text" id="ptext">0 / 0</div>
+    </div>
+    <div style="margin-top:6px; font-size:11px;" id="sync-status" style="color:#8A8480">○ aguardando…</div>
+  </div>
+
+  <!-- ══ ROMA ══ -->
+  <div class="city-section">
+    <div class="city-label">
+      <div class="city-dot" style="background:#C4622D"></div>
+      <div class="city-name">Roma</div>
+      <div class="city-line"></div>
+    </div>
+
+    <!-- Dia 12 — Chegada + Centro Histórico à tarde -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#F5EDD6">
+          <div class="date-num" style="color:#B8943C">12</div>
+          <div class="date-mon" style="color:#B8943C">Qui</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Chegada em Roma</div>
+          <div class="day-preview">Qui · chegada + caminhada leve</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Hotel Della Torre Argentina</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">07:00</div>
+            <div class="event-title">Chegada em Roma</div>
+            <div class="event-desc">Check-in no Hotel Della Torre Argentina · descansar um pouco antes de sair</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Della+Torre+Argentina+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">15:00</div>
+            <div class="event-title">Piazza Navona</div>
+            <div class="event-desc">7 min a pé do hotel · Fonte dos Quatro Rios (Bernini) · artistas de rua</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+Navona+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">16:30</div>
+            <div class="event-title">Campo de' Fiori</div>
+            <div class="event-desc">5 min a pé · mercado de flores e frutas de dia · bares à noite</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Campo+de+Fiori+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">17:30</div>
+            <div class="event-title">Fontana di Trevi 💧</div>
+            <div class="event-desc">15 min a pé · jogue a moeda com a mão direita sobre o ombro esquerdo</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Fontana+di+Trevi+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">19:00</div>
+            <div class="event-title">Jantar no centro</div>
+            <div class="event-desc">Armando al Pantheon (reservar!) ou caminhar até encontrar uma trattoria</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Armando+al+Pantheon+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 13 — Roma Antiga -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#F0E0D4">
+          <div class="date-num" style="color:#C4622D">13</div>
+          <div class="date-mon" style="color:#C4622D">Sex</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Roma Antiga</div>
+          <div class="day-preview">Sex · Coliseu + Fórum + Palatino</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Hotel Della Torre Argentina</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">08:30</div>
+            <div class="event-title">Café — Sant'Eustachio il Caffè ☕</div>
+            <div class="event-desc">3 min a pé do hotel · o melhor espresso de Roma · desde 1938</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Sant+Eustachio+il+Caffe+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">09:15</div>
+            <div class="event-title">Monumento a Vittorio Emanuele II 🇮🇹</div>
+            <div class="event-desc">15 min a pé · "Altar da Pátria" · suba ao terraço panorâmico (elevador pago)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Altare+della+Patria+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:00</div>
+            <div class="event-title">Coliseu 🏛️</div>
+            <div class="event-desc">Ingresso inclui Fórum + Palatino · chegar 20 min antes no horário marcado</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Colosseo+Roma" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">12:30</div>
+            <div class="event-title">Arco de Constantino + Arco de Tito</div>
+            <div class="event-desc">Saindo do Coliseu · Arco de Constantino é logo em frente · Arco de Tito na entrada do Fórum</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Arco+di+Tito+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">13:00</div>
+            <div class="event-title">Fórum Romano</div>
+            <div class="event-desc">Templo de Saturno · Via Sacra · Casa das Vestais · mesmo ingresso do Coliseu</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Foro+Romano+Roma" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso incluso</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">14:30</div>
+            <div class="event-title">Monte Palatino</div>
+            <div class="event-desc">Ruínas dos palácios imperiais · berço da lenda de Rômulo e Remo · vista linda do Circo Máximo</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Palatino+Roma" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso incluso</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">16:30</div>
+            <div class="event-title">Almoço tardio + gelato — Bairro Monti</div>
+            <div class="event-desc">5 min a pé do Fórum · bairro descolado · trattorias autênticas</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Monti+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">19:00</div>
+            <div class="event-title">Volta para o hotel + descanso</div>
+            <div class="event-desc">Dia pesado de caminhada · relaxar antes do próximo dia</div>
+            <div class="event-pills">
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 14 — Centro Histórico + Trastevere à noite -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#F0E0D4">
+          <div class="date-num" style="color:#C4622D">14</div>
+          <div class="date-mon" style="color:#C4622D">Sáb</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Centro Histórico + Trastevere</div>
+          <div class="day-preview">Sáb · Panteão + praças + noite no Trastevere</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Hotel Della Torre Argentina</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">08:30</div>
+            <div class="event-title">Café da manhã no hotel</div>
+            <div class="event-desc">Dia mais tranquilo · não precisa sair cedo</div>
+            <div class="event-pills">
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">09:30</div>
+            <div class="event-title">Panteão 🏛️</div>
+            <div class="event-desc">5 min a pé do hotel · templo romano mais bem preservado · óculo no teto</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Pantheon+Roma" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">11:00</div>
+            <div class="event-title">Gelato — Giolitti 🍦</div>
+            <div class="event-desc">3 min a pé do Panteão · gelateria histórica desde 1900</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Giolitti+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">11:30</div>
+            <div class="event-title">Piazza di Spagna + Escadaria 🌹</div>
+            <div class="event-desc">15 min a pé · escadaria da Trinità dei Monti · Via Condotti (compras de luxo)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+di+Spagna+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">13:00</div>
+            <div class="event-title">Almoço — Armando al Pantheon ou região</div>
+            <div class="event-desc">Trattorias tradicionais na volta para o hotel · cacio e pepe, carbonara, amatriciana</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Armando+al+Pantheon+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">15:00</div>
+            <div class="event-title">Villa Borghese + Terrazza del Pincio 🌳</div>
+            <div class="event-desc">Jardins · mirante sobre a Piazza del Popolo · parque gigante para relaxar</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Villa+Borghese+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">17:00</div>
+            <div class="event-title">Piazza del Popolo</div>
+            <div class="event-desc">Descer pela escadaria do Pincio · obelisco egípcio · igrejas gêmeas</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+del+Popolo+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#534AB7"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">19:30</div>
+            <div class="event-title">Noite no Trastevere 🎶</div>
+            <div class="event-desc">Atravesse o Tibre · ruas de paralelepípedo · músicos cantam com a multidão nas praças</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Trastevere+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#534AB7"></div></div>
+          <div class="event-content">
+            <div class="event-time">20:00</div>
+            <div class="event-title">Jantar em Trastevere — Da Enzo al 29</div>
+            <div class="event-desc">Cacio e pepe lendária · chegar cedo, não aceita reserva · ou Checco er Carettiere (aceita reserva)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Da+Enzo+al+29+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 15 — Vaticano + Castelo Sant'Angelo -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#F0E0D4">
+          <div class="date-num" style="color:#C4622D">15</div>
+          <div class="date-mon" style="color:#C4622D">Dom</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Vaticano + Sant'Angelo</div>
+          <div class="day-preview">Dom · Vaticano · Basílica · Castelo</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Hotel Della Torre Argentina</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">07:30</div>
+            <div class="event-title">Café rápido + táxi ou caminhada</div>
+            <div class="event-desc">Hotel → Vaticano ~25 min a pé ou 10 min de táxi (recomendado para chegar no horário)</div>
+            <div class="event-pills">
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">08:30</div>
+            <div class="event-title">Museus Vaticanos + Capela Sistina 🎨</div>
+            <div class="event-desc">Reserva horário 08:30 · leva 3-4h para percorrer tudo · Capela Sistina no final</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Musei+Vaticani+Roma" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">12:30</div>
+            <div class="event-title">Almoço + Gelato — I Gracchi 🍦</div>
+            <div class="event-desc">Bairro Prati · trattorias menos turísticas · I Gracchi é uma das melhores gelaterias de Roma</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Gelateria+I+Gracchi+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">14:00</div>
+            <div class="event-title">Basílica de São Pedro ⛪</div>
+            <div class="event-desc">Entrada gratuita · Pietà de Michelangelo · subir à cúpula (pago, 551 degraus, vista espetacular)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Basilica+di+San+Pietro+Roma" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Gratuito</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">16:30</div>
+            <div class="event-title">Ponte Sant'Angelo 👼</div>
+            <div class="event-desc">10 min a pé da Basílica · 10 estátuas de anjos de Bernini · vista linda do castelo</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Ponte+Sant+Angelo+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">17:00</div>
+            <div class="event-title">Castelo Sant'Angelo 🏰</div>
+            <div class="event-desc">Antiga fortaleza papal · museu + terraço panorâmico · dica: último horário é 18:30</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Castel+Sant+Angelo+Roma" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">20:00</div>
+            <div class="event-title">Jantar final em Roma</div>
+            <div class="event-desc">Voltar caminhando pelo Tibre · jantar no centro · Gelateria del Teatro no caminho para sobremesa</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Gelateria+del+Teatro+Roma" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 16 (saída) -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#F5EDD6">
+          <div class="date-num" style="color:#B8943C">16</div>
+          <div class="date-mon" style="color:#B8943C">Seg</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Roma → Positano</div>
+          <div class="day-preview">Seg · trem + transfer</div>
+          <div class="day-tags">
+            <span class="tag tag-move">deslocamento</span>
+            <span class="tag tag-hotel">Maison Liparlati</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:40</div>
+            <div class="event-title">Trem Roma → Nápoles</div>
+            <div class="event-desc">Partida da Estação Roma Termini · verificar bilhete e plataforma</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Roma+Termini" target="_blank">📍 Maps</a>
+              <span class="pill pill-transit">transporte</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#B8943C"></div></div>
+          <div class="event-content">
+            <div class="event-time">11:53</div>
+            <div class="event-title">Transfer Nápoles → Positano</div>
+            <div class="event-desc">Check-in no Maison Liparlati</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Positano+Campania" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Pago — RentCars</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ POSITANO ══ -->
+  <div class="city-section">
+    <div class="city-label">
+      <div class="city-dot" style="background:#5A7A5C"></div>
+      <div class="city-name">Positano / Amalfi</div>
+      <div class="city-line"></div>
+    </div>
+
+    <!-- Dia 16 Vespa -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#DCE8DC">
+          <div class="date-num" style="color:#5A7A5C">16</div>
+          <div class="date-mon" style="color:#5A7A5C">Seg</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Positano — Vespa 🛵</div>
+          <div class="day-preview">Tarde · passeio de Vespa</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Maison Liparlati</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#5A7A5C"></div></div>
+          <div class="event-content">
+            <div class="event-time">14:00 – 19:00</div>
+            <div class="event-title">Aluguel de Vespa</div>
+            <div class="event-desc">1 Vespa + 2 capacetes · retirar na Via Pasitea 255</div>
+            <div class="special-card">
+              <div class="special-row"><span>Local</span><span>Via Pasitea 255, Positano</span></div>
+              <div class="special-row"><span>Contato</span><span>+55 51 99877-5384</span></div>
+              <div class="special-row"><span>Duração</span><span>5 horas (14h–19h)</span></div>
+              <div class="special-row"><span>Pessoas</span><span>2</span></div>
+            </div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.app.goo.gl/CCpxsjzTi2kgujU1A" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 17 Capri -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#DCE8DC">
+          <div class="date-num" style="color:#5A7A5C">17</div>
+          <div class="date-mon" style="color:#5A7A5C">Ter</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Ilha de Capri 🍋</div>
+          <div class="day-preview">Ter · Boat Tour 3h</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Maison Liparlati</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">manhã</div>
+            <div class="event-title">Ferry Positano → Capri</div>
+            <div class="event-desc">Comprar bilhete no porto · verificar horários na véspera</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Porto+di+Positano" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#5A7A5C"></div></div>
+          <div class="event-content">
+            <div class="event-time">10:00</div>
+            <div class="event-title">Boat Tour Capri — Gozzo Clássico</div>
+            <div class="event-desc">3 horas · Capitão Renato · Porto Turístico de Capri, Molo 21</div>
+            <div class="special-card">
+              <div class="special-row"><span>Saída</span><span>Marina Grande — Molo 21</span></div>
+              <div class="special-row"><span>Capitão</span><span>Renato</span></div>
+              <div class="special-row"><span>Barco</span><span>Gozzo Clássico</span></div>
+              <div class="special-row"><span>Sinal pago</span><span>€ 150 ✓</span></div>
+              <div class="special-row"><span>Pagar no dia</span><span style="color:#C4622D; font-weight:600">€ 250 (dinheiro)</span></div>
+            </div>
+            <div class="alert-box">
+              💵 Recomendado pagar em dinheiro espécie ao capitão para evitar taxas de cartão italianas.
+            </div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.app.goo.gl/fEn54PuzW15NUCWu9" target="_blank">📍 Maps Molo 21</a>
+              <span class="pill pill-owe">€ 250 no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FLORENÇA (1ª estadia) ══ -->
+  <div class="city-section">
+    <div class="city-label">
+      <div class="city-dot" style="background:#3A6EA8"></div>
+      <div class="city-name">Florença</div>
+      <div class="city-line"></div>
+    </div>
+
+    <!-- Dia 18 chegada + primeira noite em Florença -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#D8E8F5">
+          <div class="date-num" style="color:#3A6EA8">18</div>
+          <div class="date-mon" style="color:#3A6EA8">Qua</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Positano → Florença</div>
+          <div class="day-preview">Qua · chegada + Ponte Vecchio ao pôr do sol</div>
+          <div class="day-tags">
+            <span class="tag tag-move">deslocamento</span>
+            <span class="tag tag-hotel">Berchielli</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">14:20</div>
+            <div class="event-title">Trem Nápoles → Florença</div>
+            <div class="event-desc">Napoli Centrale · verificar bilhete e plataforma</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Napoli+Centrale" target="_blank">📍 Maps</a>
+              <span class="pill pill-transit">transporte</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">17:17</div>
+            <div class="event-title">Chegada em Florença</div>
+            <div class="event-desc">Check-in no Hotel Berchielli · o hotel fica no Lungarno, bem ao lado da Ponte Vecchio</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Berchielli+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">18:30</div>
+            <div class="event-title">Ponte Vecchio 🌉</div>
+            <div class="event-desc">2 min do hotel · ponte mais famosa de Florença · lojinhas de joias · linda ao pôr do sol</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Ponte+Vecchio+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">19:00</div>
+            <div class="event-title">Piazza della Signoria 🏛️</div>
+            <div class="event-desc">5 min a pé · coração político de Florença · Palazzo Vecchio · esculturas ao ar livre (cópia do David)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+della+Signoria+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">20:00</div>
+            <div class="event-title">Jantar — Buca dell'Orafo</div>
+            <div class="event-desc">Tradicional trattoria ao lado dos Uffizi · desde 1946 · bistecca alla fiorentina</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Buca+dell+Orafo+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 19 — San Gimignano + Siena + volta p/ Florença -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#D8E8F5">
+          <div class="date-num" style="color:#3A6EA8">19</div>
+          <div class="date-mon" style="color:#3A6EA8">Qui</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">San Gimignano + Siena</div>
+          <div class="day-preview">Sáb · carro 10h · volta à tarde</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Berchielli</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">09:00</div>
+            <div class="event-title">Café — Caffè Gilli</div>
+            <div class="event-desc">Cappuccino + cornetto antes de pegar o carro · Piazza della Repubblica</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Caffe+Gilli+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:00</div>
+            <div class="event-title">Retirada do carro — RentCars 🚗</div>
+            <div class="event-desc">Verificar local exato de retirada · CNH + cartão de crédito para caução</div>
+            <div class="event-pills">
+              <span class="pill pill-paid">✓ Pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:15</div>
+            <div class="event-title">Estacionar — Garage Lungarno 🅿️</div>
+            <div class="event-desc">Estacionamento reservado para 3 noites (19–21 jun) · deixar o carro e partir de carro alugado</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Garage+Lungarno+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Reservado</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:30</div>
+            <div class="event-title">Saída para San Gimignano 🚗</div>
+            <div class="event-desc">Florença → San Gimignano ~50 min</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=San+Gimignano+Toscana" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">11:30</div>
+            <div class="event-title">San Gimignano</div>
+            <div class="event-desc">Torres medievais · Piazza della Cisterna · Rocca Montestaffoli (mirante)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=San+Gimignano+Toscana" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">13:00</div>
+            <div class="event-title">Gelato — Gelateria di Piazza 🍦</div>
+            <div class="event-desc">Melhor gelateria da Toscana · Piazza della Cisterna · obrigatório!</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Gelateria+di+Piazza+San+Gimignano" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">14:00</div>
+            <div class="event-title">Siena</div>
+            <div class="event-desc">Piazza del Campo · Duomo di Siena · Torre del Mangia · ~30 min de San Gimignano</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Siena+Toscana" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">17:00</div>
+            <div class="event-title">Volta para Florença 🚗</div>
+            <div class="event-desc">Siena → Florença ~1h10 · deixar carro na Garage Lungarno</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Garage+Lungarno+Firenze" target="_blank">📍 Garage Lungarno</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">18:30</div>
+            <div class="event-title">Basílica de Santa Croce ⛪</div>
+            <div class="event-desc">Onde estão enterrados Galileu, Michelangelo e Maquiavel · 10 min a pé do hotel · fechamento 17:30 (confirmar horário)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Basilica+di+Santa+Croce+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">19:30</div>
+            <div class="event-title">Jantar em Florença</div>
+            <div class="event-desc">Buca dell'Orafo ou Simbiosi · Ponte Vecchio à noite vale muito</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Ponte+Vecchio+Firenze" target="_blank">📍 Ponte Vecchio</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 20 — Lucca + Pisa + volta p/ Florença -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#D8E8F5">
+          <div class="date-num" style="color:#3A6EA8">20</div>
+          <div class="date-mon" style="color:#3A6EA8">Sex</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Lucca + Pisa</div>
+          <div class="day-preview">Sex · Toscana de carro · volta à tarde</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Berchielli</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">08:00</div>
+            <div class="event-title">Saída para Lucca 🚗</div>
+            <div class="event-desc">Florença → Lucca ~1h15 pela A11 · dia leve e bem encaixado</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Lucca+Toscana" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">09:30</div>
+            <div class="event-title">Lucca</div>
+            <div class="event-desc">Muralhas medievais intactas · Piazza dell'Anfiteatro · alugue uma bike e passeie no topo da muralha</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Lucca+Toscana" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">12:30</div>
+            <div class="event-title">Torre de Pisa — Piazza dei Miracoli</div>
+            <div class="event-desc">~30 min de Lucca · Torre inclinada + Duomo + Batistério</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Torre+di+Pisa" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">15:00</div>
+            <div class="event-title">Volta para Florença 🚗</div>
+            <div class="event-desc">Pisa → Florença ~1h · deixar carro na Garage Lungarno</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Garage+Lungarno+Firenze" target="_blank">📍 Garage Lungarno</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">16:30</div>
+            <div class="event-title">Palazzo Pitti + Jardins de Boboli 🏰</div>
+            <div class="event-desc">Antiga residência dos Médici · do lado do hotel, cruzando a Ponte Vecchio · jardins lindos para relaxar</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Palazzo+Pitti+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">18:30</div>
+            <div class="event-title">Basílica de Santa Maria Novella 🎨</div>
+            <div class="event-desc">Menos lotada que o Duomo · obras incríveis · 3 min da estação de trem (prática para o check de amanhã)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Basilica+di+Santa+Maria+Novella+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">19:30</div>
+            <div class="event-title">Gelato + passeio pelo Ponte Vecchio ao entardecer 🌉</div>
+            <div class="event-desc">My Sugar ou Gelateria dei Neri · atravessar a ponte com as luzinhas acendendo</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Ponte+Vecchio+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">20:30</div>
+            <div class="event-title">Jantar — Cibrèino</div>
+            <div class="event-desc">Favorito dos florentinos · do mesmo dono do Cibreo (estrelado) · não aceita reserva, chegar cedo</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Cibreino+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ VERONA ══ -->
+  <div class="city-section">
+    <div class="city-label">
+      <div class="city-dot" style="background:#7F77DD"></div>
+      <div class="city-name">Verona</div>
+      <div class="city-line"></div>
+    </div>
+
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#EEEDFE">
+          <div class="date-num" style="color:#7F77DD">21</div>
+          <div class="date-mon" style="color:#7F77DD">Sáb</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Florença → Verona</div>
+          <div class="day-preview">Sáb · Arena + Julieta + pôr do sol</div>
+          <div class="day-tags">
+            <span class="tag tag-move">deslocamento</span>
+            <span class="tag tag-hotel">Giulietta e Romeo</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:05</div>
+            <div class="event-title">Trem Florença → Verona</div>
+            <div class="event-desc">Stazione Santa Maria Novella · verificar bilhete</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Firenze+Santa+Maria+Novella" target="_blank">📍 Maps</a>
+              <span class="pill pill-transit">transporte</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">11:38</div>
+            <div class="event-title">Chegada em Verona</div>
+            <div class="event-desc">Check-in no Giulietta e Romeo Hotel · deixar as malas</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Giulietta+e+Romeo+Hotel+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">12:30</div>
+            <div class="event-title">Almoço na Piazza Bra</div>
+            <div class="event-desc">Em frente à Arena · muitas opções de restaurantes com vista</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+Bra+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">14:00</div>
+            <div class="event-title">Arena de Verona 🏛️</div>
+            <div class="event-desc">Coliseu romano incrivelmente preservado · mais antigo que o de Roma · ainda recebe óperas</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Arena+di+Verona" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">15:30</div>
+            <div class="event-title">Casa de Julieta ❤️</div>
+            <div class="event-desc">5 min a pé da Arena · famosa sacada · toque no peito da estátua para dar sorte no amor</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Casa+di+Giulietta+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">16:30</div>
+            <div class="event-title">Piazza delle Erbe 🌿</div>
+            <div class="event-desc">2 min a pé · mercado + cafés + arquitetura medieval · pausa para um spritz</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+delle+Erbe+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">17:30</div>
+            <div class="event-title">Catedral de Verona (Duomo) ⛪</div>
+            <div class="event-desc">5 min a pé · bonita e autêntica · menos turística</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Duomo+di+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">18:15</div>
+            <div class="event-title">Ponte Pietra 🌉</div>
+            <div class="event-desc">3 min da Catedral · ponte romana · vista incrível do rio Adige</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Ponte+Pietra+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">19:00</div>
+            <div class="event-title">Castel San Pietro 🌄</div>
+            <div class="event-desc">Atravessar a Ponte Pietra e subir · melhor vista da cidade ao pôr do sol · ~15 min de subida</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Castel+San+Pietro+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">20:30</div>
+            <div class="event-title">Jantar no centro histórico</div>
+            <div class="event-desc">Trattorias tradicionais perto da Piazza delle Erbe · experimente risotto all'amarone</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+delle+Erbe+Verona" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ VENEZA ══ -->
+  <div class="city-section">
+    <div class="city-label">
+      <div class="city-dot" style="background:#BA7517"></div>
+      <div class="city-name">Veneza</div>
+      <div class="city-line"></div>
+    </div>
+
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#FAEEDA">
+          <div class="date-num" style="color:#BA7517">22</div>
+          <div class="date-mon" style="color:#BA7517">Dom</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Verona → Veneza</div>
+          <div class="day-preview">Dom · Castelvecchio + Veneza à tarde</div>
+          <div class="day-tags">
+            <span class="tag tag-move">deslocamento</span>
+            <span class="tag tag-hotel">Hotel Montecarlo</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">08:30</div>
+            <div class="event-title">Café da manhã no hotel</div>
+            <div class="event-desc">Check-out com calma · guardar as malas na recepção se precisar</div>
+            <div class="event-pills">
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#7F77DD"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">09:00</div>
+            <div class="event-title">Castelvecchio 🏰</div>
+            <div class="event-desc">Castelo medieval + ponte fotogênica · 10 min a pé do hotel · vista linda do Adige</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Castelvecchio+Verona" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:49</div>
+            <div class="event-title">Trem Verona → Veneza</div>
+            <div class="event-desc">Verona Porta Nuova · verificar bilhete</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Verona+Porta+Nuova" target="_blank">📍 Maps</a>
+              <span class="pill pill-transit">transporte</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">11:52</div>
+            <div class="event-title">Chegada em Veneza</div>
+            <div class="event-desc">Check-in no Hotel Montecarlo · deixar as malas · Veneza não tem carros, tudo a pé!</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Montecarlo+Venezia" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">13:00</div>
+            <div class="event-title">Almoço perto da Praça de São Marcos</div>
+            <div class="event-desc">Evite restaurantes na praça (caros) · procure trattorias nas ruelas laterais · experimente cicchetti</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+San+Marco+Venezia" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">14:30</div>
+            <div class="event-title">Praça de São Marcos 🏛️</div>
+            <div class="event-desc">Coração de Veneza · cafés históricos · Campanile (subir para vista panorâmica)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazza+San+Marco+Venezia" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">15:00</div>
+            <div class="event-title">Basílica de São Marcos ⛪</div>
+            <div class="event-desc">Mosaicos dourados incríveis · entrada da basílica é gratuita (reserve online para pular fila)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Basilica+di+San+Marco+Venezia" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">16:00</div>
+            <div class="event-title">Palácio Ducal + Ponte dos Suspiros 🏰🌉</div>
+            <div class="event-desc">Ao lado da Basílica · arquitetura lindíssima · inclui visita à Ponte dos Suspiros que liga à antiga prisão</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Palazzo+Ducale+Venezia" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">18:00</div>
+            <div class="event-title">Passeio de vaporetto no Grande Canal 🚤</div>
+            <div class="event-desc">Linha 1 · "avenida principal" de Veneza · ingresso único ~9€ · mais barato que gôndola</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Vaporetto+Venezia" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">19:00</div>
+            <div class="event-title">Ponte de Rialto 🌉</div>
+            <div class="event-desc">Desembarcar na parada Rialto · ponte mais famosa sobre o Grande Canal · ótima para fotos ao entardecer</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Ponte+di+Rialto+Venezia" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#BA7517"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">19:30</div>
+            <div class="event-title">Teatro La Fenice 🎭</div>
+            <div class="event-desc">5 min a pé de Rialto · um dos teatros de ópera mais famosos da Itália · lindo por fora mesmo sem entrar</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Teatro+La+Fenice+Venezia" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#C4622D"></div></div>
+          <div class="event-content">
+            <div class="event-time">20:30</div>
+            <div class="event-title">Jantar típico veneziano</div>
+            <div class="event-desc">Cicchetti bar nas ruelas · experimente risotto al nero di seppia, baccalà mantecato, sarde in saor</div>
+            <div class="event-pills">
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FLORENÇA (volta) ══ -->
+  <div class="city-section">
+    <div class="city-label">
+      <div class="city-dot" style="background:#3A6EA8"></div>
+      <div class="city-name">Florença — volta</div>
+      <div class="city-line"></div>
+    </div>
+
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#D8E8F5">
+          <div class="date-num" style="color:#3A6EA8">23</div>
+          <div class="date-mon" style="color:#3A6EA8">Seg</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Veneza → Florença</div>
+          <div class="day-preview">Seg · trem 08:17</div>
+          <div class="day-tags">
+            <span class="tag tag-move">deslocamento</span>
+            <span class="tag tag-hotel">Hotel Duomo Firenze</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">08:17</div>
+            <div class="event-title">Trem Veneza → Florença</div>
+            <div class="event-desc">Venezia Santa Lucia · verificar bilhete</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Venezia+Santa+Lucia" target="_blank">📍 Maps</a>
+              <span class="pill pill-transit">transporte</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#3A6EA8"></div></div>
+          <div class="event-content">
+            <div class="event-time">10:20</div>
+            <div class="event-title">Chegada em Florença</div>
+            <div class="event-desc">Check-in no Hotel Duomo Firenze</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Duomo+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 23 — Chegada + Duomo + Uffizi + Piazzale pôr do sol -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#D8E8F5">
+          <div class="date-num" style="color:#3A6EA8">23</div>
+          <div class="date-mon" style="color:#3A6EA8">Seg</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Florença — Duomo, Uffizi & Pôr do Sol</div>
+          <div class="day-preview">Seg · dia completo · Piazzale ao fim da tarde</div>
+          <div class="day-tags">
+            <span class="tag tag-hotel">Hotel Duomo Firenze</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:20</div>
+            <div class="event-title">Chegada em Florença</div>
+            <div class="event-desc">Trem de Veneza · check-in no Hotel Duomo Firenze (literalmente ao lado do Duomo!)</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Duomo+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">11:00</div>
+            <div class="event-title">Catedral de Santa Maria del Fiore — Duomo ⛪</div>
+            <div class="event-desc">Entrada da catedral é gratuita · cúpula de Brunelleschi por dentro é impressionante</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Duomo+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Gratuito</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">11:30</div>
+            <div class="event-title">Campanário de Giotto 🗼</div>
+            <div class="event-desc">Ao lado do Duomo · 414 degraus · vista panorâmica menos claustrofóbica que a cúpula</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Campanile+di+Giotto+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-owe">pagar no local</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">13:00</div>
+            <div class="event-title">Almoço — Buca dell'Orafo</div>
+            <div class="event-desc">Tradicional trattoria ao lado dos Uffizi · bistecca alla fiorentina · Via dei Girolami 28</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Buca+dell+Orafo+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">14:30</div>
+            <div class="event-title">Galleria degli Uffizi 🎨</div>
+            <div class="event-desc">Botticelli (Nascimento de Vênus) · Leonardo · Michelangelo · 2-3h para percorrer</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Galleria+degli+Uffizi+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">17:30</div>
+            <div class="event-title">Gelato — Gelateria dei Neri 🍦</div>
+            <div class="event-desc">Pertinho dos Uffizi · favorita dos locais · Via dei Neri 9</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Gelateria+dei+Neri+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#C4622D"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">18:30</div>
+            <div class="event-title">Piazzale Michelangelo 🌅</div>
+            <div class="event-desc">Melhor mirante de Florença · pôr do sol clássico · ônibus 12/13 ou caminhar 25 min subindo</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Piazzale+Michelangelo+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#3A6EA8"></div></div>
+          <div class="event-content">
+            <div class="event-time">20:30</div>
+            <div class="event-title">Jantar — Simbiosi ou Buca Niccolini</div>
+            <div class="event-desc">Simbiosi: massas orgânicas e vinhos naturais · Buca Niccolini: toscana autêntica</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Simbiosi+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dia 24 — Accademia + Santa Croce + Trem Milão -->
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#D8E8F5">
+          <div class="date-num" style="color:#3A6EA8">24</div>
+          <div class="date-mon" style="color:#3A6EA8">Ter</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Florença manhã → Milão</div>
+          <div class="day-preview">Ter · David + Santa Croce + trem 12:25</div>
+          <div class="day-tags">
+            <span class="tag tag-move">deslocamento</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#B8943C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">08:00</div>
+            <div class="event-title">Café — Caffè Rivoire ☕</div>
+            <div class="event-desc">Vista para a Piazza della Signoria · cappuccino + cioccolata calda</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Caffe+Rivoire+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">09:00</div>
+            <div class="event-title">Galleria dell'Accademia — O David 🗿</div>
+            <div class="event-desc">Davi de Michelangelo original · 1h é suficiente · Via Ricasoli 58 · 8 min a pé do hotel</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Galleria+Accademia+Firenze" target="_blank">📍 Maps</a>
+              <span class="pill pill-paid">✓ Ingresso pago</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#5A7A5C"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:15</div>
+            <div class="event-title">Gelato — Badiani 🍦</div>
+            <div class="event-desc">Prove o sabor Buontalenti — o original florentino criado no século XVI</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Badiani+Firenze" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">10:45</div>
+            <div class="event-title">Check-out + caminhada para estação</div>
+            <div class="event-desc">Voltar ao hotel, pegar malas · 10 min a pé até Santa Maria Novella</div>
+            <div class="event-pills">
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline">
+            <div class="ev-dot" style="background:#3A6EA8"></div>
+            <div class="ev-line"></div>
+          </div>
+          <div class="event-content">
+            <div class="event-time">12:25</div>
+            <div class="event-title">Trem Florença → Milão</div>
+            <div class="event-desc">Stazione Santa Maria Novella · verificar bilhete e plataforma</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Firenze+Santa+Maria+Novella" target="_blank">📍 Maps</a>
+              <span class="pill pill-transit">transporte</span>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#3A6EA8"></div></div>
+          <div class="event-content">
+            <div class="event-time">14:20</div>
+            <div class="event-title">Chegada em Milão</div>
+            <div class="event-desc">Dia livre em Milão antes do voo</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Milano+Centrale" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MILÃO / VOO ══ -->
+  <div class="city-section">
+    <div class="city-label">
+      <div class="city-dot" style="background:#D4537E"></div>
+      <div class="city-name">Milão — voo de volta</div>
+      <div class="city-line"></div>
+    </div>
+
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header">
+        <div class="date-badge" style="background:#FBEAF0">
+          <div class="date-num" style="color:#D4537E">25</div>
+          <div class="date-mon" style="color:#D4537E">Qua</div>
+        </div>
+        <div class="day-main">
+          <div class="day-city-name">Voo de Volta ✈️</div>
+          <div class="day-preview">Qua · partida 19:00</div>
+          <div class="day-tags">
+            <span class="tag tag-move">último dia</span>
+          </div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+      <div class="events-panel">
+        <div class="event-row">
+          <div class="event-timeline"><div class="ev-dot" style="background:#D4537E"></div></div>
+          <div class="event-content">
+            <div class="event-time">19:00</div>
+            <div class="event-title">Voo de volta</div>
+            <div class="event-desc">Aeroporto de Malpensa (MXP) · chegar com 2h30 de antecedência</div>
+            <div class="event-pills">
+              <a class="pill pill-maps" href="https://maps.apple.com/?q=Malpensa+Airport+Milano" target="_blank">📍 Maps</a>
+              <button class="pill pill-check" onclick="toggleCheck(event,this)">Marcar feito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-itinerary -->
+
+
+<!-- ══ PAGE: RESERVAS ══ -->
+<div id="page-extras" class="page">
+  <div class="extras-section">
+    <div class="extras-title">Reservas & Ingressos</div>
+
+    <!-- Vespa -->
+    <div class="extra-card">
+      <div class="extra-card-header">
+        <div class="extra-card-icon" style="background:#DCE8DC; font-size:22px">🛵</div>
+        <div>
+          <div class="extra-card-title">Aluguel de Vespa</div>
+          <div class="extra-card-sub">16 jun · 14:00–19:00 · Positano</div>
+        </div>
+      </div>
+      <div class="extra-card-body">
+        <div class="info-row"><span class="info-label">Cliente</span><span class="info-val">Everton Santos</span></div>
+        <div class="info-row"><span class="info-label">Contato</span><span class="info-val"><a href="tel:+5551998775384">+55 51 99877-5384</a></span></div>
+        <div class="info-row"><span class="info-label">Scooter</span><span class="info-val">1 Vespa + 2 capacetes</span></div>
+        <div class="info-row"><span class="info-label">Pessoas</span><span class="info-val">2</span></div>
+        <div class="info-row"><span class="info-label">Local</span><span class="info-val"><a href="https://maps.app.goo.gl/CCpxsjzTi2kgujU1A" target="_blank">Via Pasitea 255 📍</a></span></div>
+        <div class="info-row"><span class="info-label">Pagamento</span><span class="info-val" style="color:#5A7A5C">✓ Pago integralmente</span></div>
+      </div>
+    </div>
+
+    <!-- Boat Tour Capri -->
+    <div class="extra-card">
+      <div class="extra-card-header">
+        <div class="extra-card-icon" style="background:#DCE8DC; font-size:22px">⛵</div>
+        <div>
+          <div class="extra-card-title">Boat Tour Capri</div>
+          <div class="extra-card-sub">17 jun · 10:00 · Gozzo Clássico</div>
+        </div>
+      </div>
+      <div class="extra-card-body">
+        <div class="info-row"><span class="info-label">Reserva</span><span class="info-val">Everton Santos</span></div>
+        <div class="info-row"><span class="info-label">Contato</span><span class="info-val"><a href="tel:+5551998775384">+55 51 99877-5384</a></span></div>
+        <div class="info-row"><span class="info-label">Capitão</span><span class="info-val">Renato</span></div>
+        <div class="info-row"><span class="info-label">Saída</span><span class="info-val"><a href="https://maps.app.goo.gl/fEn54PuzW15NUCWu9" target="_blank">Molo 21 — Marina Grande 📍</a></span></div>
+        <div class="info-row"><span class="info-label">Duração</span><span class="info-val">3 horas</span></div>
+        <div class="info-row"><span class="info-label">Pessoas</span><span class="info-val">2</span></div>
+        <div class="info-row"><span class="info-label">Total</span><span class="info-val">€ 400</span></div>
+        <div class="info-row"><span class="info-label">Sinal pago</span><span class="info-val" style="color:#5A7A5C">€ 150 ✓</span></div>
+        <div class="info-row"><span class="info-label">Pagar no dia</span><span class="info-val" style="color:#C4622D; font-weight:600">€ 250</span></div>
+        <div class="alert-box">💵 Pagar em dinheiro ao capitão Renato para evitar taxas de cartão. Gruta Azul não inclusa: € 18 extra no local se quiser entrar.</div>
+        <div style="margin-top:10px; font-size:12px; font-weight:500; color:#3A5A3C; margin-bottom:6px">O que inclui</div>
+        <div style="font-size:12px; color:#4A4540; line-height:1.6">Capitão guia · combustível · cobertura solar · cooler com gelo · toalhas de praia · tomada USB · chuveiro de água doce · música · águas, refrigerantes e cervejas</div>
+      </div>
+    </div>
+
+    <!-- Gastronomia -->
+    <div class="extra-card">
+      <div class="extra-card-header">
+        <div class="extra-card-icon" style="background:#F0E0D4; font-size:22px">🍝</div>
+        <div>
+          <div class="extra-card-title">Gastronomia — Roma</div>
+          <div class="extra-card-sub">Osterie, cafés e gelato imperdíveis</div>
+        </div>
+      </div>
+      <div class="extra-card-body">
+        <div style="font-size:11px; font-weight:500; color:#8A8480; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px">Caffè</div>
+        <div class="info-row"><span class="info-label">Sant'Eustachio il Caffè</span><span class="info-val"><a href="https://maps.apple.com/?q=Sant+Eustachio+il+Caffe+Roma" target="_blank">📍 Pantheon — o melhor espresso de Roma</a></span></div>
+        <div class="info-row"><span class="info-label">Caffè Greco</span><span class="info-val"><a href="https://maps.apple.com/?q=Caffe+Greco+Roma" target="_blank">📍 Via Condotti — desde 1760</a></span></div>
+        <div style="font-size:11px; font-weight:500; color:#8A8480; text-transform:uppercase; letter-spacing:0.06em; margin:10px 0 6px">Osterie & Trattorias</div>
+        <div class="info-row"><span class="info-label">Armando al Pantheon</span><span class="info-val"><a href="https://maps.apple.com/?q=Armando+al+Pantheon+Roma" target="_blank">📍 Desde 1961 · reservar!</a></span></div>
+        <div class="info-row"><span class="info-label">Da Enzo al 29</span><span class="info-val"><a href="https://maps.apple.com/?q=Da+Enzo+al+29+Trastevere" target="_blank">📍 Trastevere · cacio e pepe</a></span></div>
+        <div class="info-row"><span class="info-label">Checco er Carettiere</span><span class="info-val"><a href="https://maps.apple.com/?q=Checco+er+Carettiere+Trastevere" target="_blank">📍 Trastevere · desde 1935</a></span></div>
+        <div style="font-size:11px; font-weight:500; color:#8A8480; text-transform:uppercase; letter-spacing:0.06em; margin:10px 0 6px">Gelato</div>
+        <div class="info-row"><span class="info-label">Giolitti</span><span class="info-val"><a href="https://maps.apple.com/?q=Gelateria+Giolitti+Roma" target="_blank">📍 Pantheon · desde 1900</a></span></div>
+        <div class="info-row"><span class="info-label">Gelateria del Teatro</span><span class="info-val"><a href="https://maps.apple.com/?q=Gelateria+del+Teatro+Roma" target="_blank">📍 Piazza Navona · artesanal</a></span></div>
+        <div class="info-row"><span class="info-label">I Gracchi</span><span class="info-val"><a href="https://maps.apple.com/?q=Gelateria+I+Gracchi+Roma" target="_blank">📍 Vaticano · tiramisu e café</a></span></div>
+      </div>
+    </div>
+
+    <div class="extra-card">
+      <div class="extra-card-header">
+        <div class="extra-card-icon" style="background:#D8E8F5; font-size:22px">🍷</div>
+        <div>
+          <div class="extra-card-title">Gastronomia — Florença</div>
+          <div class="extra-card-sub">Osterie, cafés e gelato imperdíveis</div>
+        </div>
+      </div>
+      <div class="extra-card-body">
+        <div style="font-size:11px; font-weight:500; color:#8A8480; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px">Caffè</div>
+        <div class="info-row"><span class="info-label">Caffè Gilli</span><span class="info-val"><a href="https://maps.apple.com/?q=Caffe+Gilli+Firenze" target="_blank">📍 Piazza Repubblica · desde 1733</a></span></div>
+        <div class="info-row"><span class="info-label">Caffè Rivoire</span><span class="info-val"><a href="https://maps.apple.com/?q=Caffe+Rivoire+Firenze" target="_blank">📍 Piazza Signoria · vista incrível</a></span></div>
+        <div style="font-size:11px; font-weight:500; color:#8A8480; text-transform:uppercase; letter-spacing:0.06em; margin:10px 0 6px">Osterie & Trattorias</div>
+        <div class="info-row"><span class="info-label">Buca dell'Orafo</span><span class="info-val"><a href="https://maps.apple.com/?q=Buca+dell+Orafo+Firenze" target="_blank">📍 Ao lado dos Uffizi</a></span></div>
+        <div class="info-row"><span class="info-label">Simbiosi</span><span class="info-val"><a href="https://maps.apple.com/?q=Simbiosi+Firenze" target="_blank">📍 Massas orgânicas · vinhos naturais</a></span></div>
+        <div class="info-row"><span class="info-label">Cibreino</span><span class="info-val"><a href="https://maps.apple.com/?q=Cibreino+Firenze" target="_blank">📍 Favorito dos florentinos</a></span></div>
+        <div style="font-size:11px; font-weight:500; color:#8A8480; text-transform:uppercase; letter-spacing:0.06em; margin:10px 0 6px">Gelato</div>
+        <div class="info-row"><span class="info-label">Gelateria dei Neri</span><span class="info-val"><a href="https://maps.apple.com/?q=Gelateria+dei+Neri+Firenze" target="_blank">📍 Perto dos Uffizi · dos locais</a></span></div>
+        <div class="info-row"><span class="info-label">My Sugar</span><span class="info-val"><a href="https://maps.apple.com/?q=My+Sugar+Gelato+Firenze" target="_blank">📍 Entre Accademia e Duomo</a></span></div>
+        <div class="info-row"><span class="info-label">Badiani</span><span class="info-val"><a href="https://maps.apple.com/?q=Badiani+Gelato+Firenze" target="_blank">📍 Sabor Buontalenti — o original</a></span></div>
+        <div class="info-row"><span class="info-label">Gelateria di Piazza</span><span class="info-val"><a href="https://maps.apple.com/?q=Gelateria+di+Piazza+San+Gimignano" target="_blank">📍 San Gimignano · melhor da Toscana</a></span></div>
+      </div>
+    </div>
+
+
+    <div class="extra-card">
+      <div class="extra-card-header">
+        <div class="extra-card-icon" style="background:#F5EDD6; font-size:22px">🚗</div>
+        <div>
+          <div class="extra-card-title">Aluguel de Carro</div>
+          <div class="extra-card-sub">RentCars · retirada 10:00</div>
+        </div>
+      </div>
+      <div class="extra-card-body">
+        <div class="info-row"><span class="info-label">Empresa</span><span class="info-val">RentCars</span></div>
+        <div class="info-row"><span class="info-label">Retirada</span><span class="info-val">10:00</span></div>
+        <div class="info-row"><span class="info-label">Pagamento</span><span class="info-val" style="color:#5A7A5C">✓ Pago</span></div>
+        <div class="alert-box">📋 Lembrar de levar CNH + documento e cartão de crédito para caução na retirada.</div>
+      </div>
+    </div>
+
+    <!-- Ingressos GetYourGuide -->
+    <div class="extra-card">
+      <div class="extra-card-header">
+        <div class="extra-card-icon" style="background:#F0E0D4; font-size:22px">🎟</div>
+        <div>
+          <div class="extra-card-title">Ingressos — GetYourGuide</div>
+          <div class="extra-card-sub">Todos na wallet do app</div>
+        </div>
+      </div>
+      <div class="extra-card-body">
+        <div class="info-row"><span class="info-label">Coliseu + Foro</span><span class="info-val" style="color:#5A7A5C">✓ 13 jun · 10:00</span></div>
+        <div class="info-row"><span class="info-label">Panteão</span><span class="info-val" style="color:#5A7A5C">✓ 14 jun · 09:30</span></div>
+        <div class="info-row"><span class="info-label">Vaticano + Sistina</span><span class="info-val" style="color:#5A7A5C">✓ 15 jun · 08:30</span></div>
+        <div class="info-row"><span class="info-label">Siena + S. Gimignano</span><span class="info-val" style="color:#5A7A5C">✓ 19 jun</span></div>
+        <div class="info-row"><span class="info-label">Torre de Pisa</span><span class="info-val" style="color:#5A7A5C">✓ 20 jun</span></div>
+        <div class="alert-box">📱 Abrir o app GetYourGuide e deixar os ingressos na wallet offline antes de viajar.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-extras -->
+
+
+<!-- ══ PAGE: HOTÉIS ══ -->
+<div id="page-hotels" class="page">
+  <div class="hotels-list">
+    <div style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:500; color:var(--ink); margin-bottom:1rem; padding-top:1.25rem">Hospedagens</div>
+
+    <div class="hotel-card">
+      <div class="hotel-city-strip" style="background:#F0E0D4; color:#993C1D">Roma · 12–16 jun · 4 noites</div>
+      <div class="hotel-body">
+        <div class="hotel-name">Hotel Della Torre Argentina</div>
+        <div class="hotel-meta">Centro histórico · próximo ao Pantheon</div>
+        <div style="display:flex; gap:6px; margin-top:8px">
+          <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Della+Torre+Argentina+Roma" target="_blank">📍 Maps</a>
+          <span class="hotel-app">Booking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-city-strip" style="background:#DCE8DC; color:#3A5A3C">Positano · 16–18 jun · 2 noites</div>
+      <div class="hotel-body">
+        <div class="hotel-name">Maison Liparlati</div>
+        <div class="hotel-meta">Positano, Costa Amalfitana</div>
+        <div style="display:flex; gap:6px; margin-top:8px">
+          <a class="pill pill-maps" href="https://maps.apple.com/?q=Maison+Liparlati+Positano" target="_blank">📍 Maps</a>
+          <span class="hotel-app">Booking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-city-strip" style="background:#D8E8F5; color:#185FA5">Florença · 18–21 jun · 3 noites</div>
+      <div class="hotel-body">
+        <div class="hotel-name">Berchielli</div>
+        <div class="hotel-meta">Lungarno Acciaiuoli · à beira do Arno</div>
+        <div style="display:flex; gap:6px; margin-top:8px">
+          <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Berchielli+Firenze" target="_blank">📍 Maps</a>
+          <span class="hotel-app" style="background:#FEF0E6; color:#C4622D">CVC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-city-strip" style="background:#EEEDFE; color:#534AB7">Verona · 21–22 jun · 1 noite</div>
+      <div class="hotel-body">
+        <div class="hotel-name">Giulietta e Romeo Hotel</div>
+        <div class="hotel-meta">Centro histórico de Verona</div>
+        <div style="display:flex; gap:6px; margin-top:8px">
+          <a class="pill pill-maps" href="https://maps.apple.com/?q=Giulietta+Romeo+Hotel+Verona" target="_blank">📍 Maps</a>
+          <span class="hotel-app" style="background:#FEF0E6; color:#C4622D">CVC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-city-strip" style="background:#FAEEDA; color:#854F0B">Veneza · 22–23 jun · 1 noite</div>
+      <div class="hotel-body">
+        <div class="hotel-name">Hotel Montecarlo</div>
+        <div class="hotel-meta">Veneza</div>
+        <div style="display:flex; gap:6px; margin-top:8px">
+          <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Montecarlo+Venezia" target="_blank">📍 Maps</a>
+          <span class="hotel-app">Booking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-city-strip" style="background:#D8E8F5; color:#185FA5">Florença · 23–25 jun · 2 noites</div>
+      <div class="hotel-body">
+        <div class="hotel-name">Hotel Duomo Firenze</div>
+        <div class="hotel-meta">Próximo ao Duomo</div>
+        <div style="display:flex; gap:6px; margin-top:8px">
+          <a class="pill pill-maps" href="https://maps.apple.com/?q=Hotel+Duomo+Firenze" target="_blank">📍 Maps</a>
+          <span class="hotel-app">Booking</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-hotels -->
+
+<script>
+  /* Firebase inline shim — usa localStorage, sincroniza via BroadcastChannel */
+  const FIREBASE_ENABLED = false;
+  const checksRef = null, customRef = null;
+
+  /* ── NAV ── */
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    const idx = ['itinerary','extras','hotels'].indexOf(id);
+    document.querySelectorAll('.nav-item')[idx].classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function toggleDay(card) {
+    if (event.target.closest('.pill') || event.target.closest('.add-item-row') ||
+        event.target.tagName === 'A' || event.target.tagName === 'BUTTON' ||
+        event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT') return;
+    card.classList.toggle('open');
+  }
+
+  /* ── SYNC STATUS ── */
+  function setSyncStatus(status) {
+    const el = document.getElementById('sync-status');
+    if (!el) return;
+    const map = {
+      ok:        { text: '● sincronizado', color: '#1D9E75' },
+      saving:    { text: '↑ salvando…',    color: '#B8943C' },
+      offline:   { text: '○ offline',      color: '#8A8480' },
+      local:     { text: '○ salvo local',  color: '#8A8480' },
+      error:     { text: '✕ erro',         color: '#C4622D' },
+    };
+    const s = map[status] || map.ok;
+    el.textContent = s.text;
+    el.style.color = s.color;
+  }
+
+  /* ── PROGRESS ── */
+  function updateProgress() {
+    const total = document.querySelectorAll('.pill-check').length;
+    const done  = document.querySelectorAll('.pill-check.done').length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('pbar').style.width = pct + '%';
+    document.getElementById('ptext').textContent = done + ' / ' + total;
+  }
+
+  /* ── CHECKS ── */
+  const checkState = {};
+
+  function applyChecks(data) {
+    Object.assign(checkState, data);
+    document.querySelectorAll('.pill-check').forEach(btn => {
+      const key = btn.dataset.key;
+      if (!key) return;
+      const row = btn.closest('.event-row');
+      if (checkState[key]) {
+        row.classList.add('done'); btn.classList.add('done'); btn.textContent = '✓ Feito';
+      } else {
+        row.classList.remove('done'); btn.classList.remove('done'); btn.textContent = 'Marcar feito';
+      }
+    });
+    updateProgress();
+  }
+
+  function toggleCheck(ev, btn) {
+    ev.stopPropagation();
+    const key = btn.dataset.key;
+    if (!key) return;
+    const newVal = !checkState[key];
+    checkState[key] = newVal;
+    const row = btn.closest('.event-row');
+    if (newVal) {
+      row.classList.add('done'); btn.classList.add('done'); btn.textContent = '✓ Feito';
+    } else {
+      row.classList.remove('done'); btn.classList.remove('done'); btn.textContent = 'Marcar feito';
+    }
+    updateProgress();
+    if (checksRef) {
+      setSyncStatus('saving');
+      checksRef.child(key).set(newVal || null)
+        .then(() => setSyncStatus('ok'))
+        .catch(() => setSyncStatus('error'));
+    } else {
+      try { localStorage.setItem('italia_checks', JSON.stringify(checkState)); } catch(e){}
+      setSyncStatus('local');
+    }
+  }
+
+  /* ── CUSTOM ITEMS ── */
+  const TYPE_ICONS = {
+    restaurante:'🍽', cafe:'☕', atracao:'🏛',
+    gelato:'🍦', compras:'🛍', outro:'📌',
+  };
+
+  function injectAddButtons() {
+    document.querySelectorAll('.events-panel').forEach((panel, idx) => {
+      const dayCard = panel.closest('.day-card');
+      const dayId = 'day_' + idx;
+      dayCard.dataset.dayId = dayId;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'add-item-row';
+      wrap.innerHTML = `
+        <button class="add-item-btn" onclick="openAddForm(this)">
+          <span class="add-item-plus">+</span> Adicionar item
+        </button>
+        <div class="add-form" id="form_${dayId}">
+          <select id="type_${dayId}">
+            <option value="restaurante">🍽 Restaurante</option>
+            <option value="cafe">☕ Café</option>
+            <option value="atracao">🏛 Atração</option>
+            <option value="gelato">🍦 Gelato</option>
+            <option value="compras">🛍 Compras</option>
+            <option value="outro">📌 Outro</option>
+          </select>
+          <input type="text" id="name_${dayId}" placeholder="Nome do lugar" />
+          <input type="text" id="desc_${dayId}" placeholder="Notas (opcional)" />
+          <div class="add-form-row">
+            <input type="text" id="time_${dayId}" placeholder="Horário ex: 20:00" style="max-width:130px" />
+            <button class="btn-cancel-item" onclick="closeAddForm('${dayId}')">Cancelar</button>
+            <button class="btn-save-item" onclick="saveCustomItem('${dayId}')">Salvar</button>
+          </div>
+        </div>`;
+      panel.appendChild(wrap);
+    });
+  }
+
+  function openAddForm(btn) {
+    const wrap = btn.closest('.add-item-row');
+    btn.style.display = 'none';
+    wrap.querySelector('.add-form').classList.add('open');
+    wrap.querySelector('input[id^="name_"]').focus();
+  }
+
+  function closeAddForm(dayId) {
+    const wrap = document.getElementById('form_' + dayId).closest('.add-item-row');
+    wrap.querySelector('.add-item-btn').style.display = '';
+    document.getElementById('form_' + dayId).classList.remove('open');
+    ['name_','desc_','time_'].forEach(p => { document.getElementById(p+dayId).value = ''; });
+  }
+
+  function saveCustomItem(dayId) {
+    const name = document.getElementById('name_' + dayId).value.trim();
+    if (!name) { document.getElementById('name_' + dayId).focus(); return; }
+    const item = {
+      name,
+      type: document.getElementById('type_' + dayId).value,
+      desc: document.getElementById('desc_' + dayId).value.trim(),
+      time: document.getElementById('time_' + dayId).value.trim(),
+      ts: Date.now()
+    };
+    if (customRef) {
+      setSyncStatus('saving');
+      customRef.child(dayId).push(item)
+        .then(ref => { renderCustomItem(dayId, ref.key, item); closeAddForm(dayId); updateProgress(); setSyncStatus('ok'); })
+        .catch(() => setSyncStatus('error'));
+    } else {
+      const key = 'local_' + Date.now();
+      renderCustomItem(dayId, key, item);
+      closeAddForm(dayId);
+      updateProgress();
+      saveLocalCustom();
+      setSyncStatus('local');
+    }
+  }
+
+  function renderCustomItem(dayId, itemKey, item) {
+    const panel = document.querySelector(`[data-day-id="${dayId}"] .events-panel`);
+    if (!panel) return;
+    const addRow = panel.querySelector('.add-item-row');
+    const icon = TYPE_ICONS[item.type] || '📌';
+    const checkKey = 'custom_' + itemKey;
+    const row = document.createElement('div');
+    row.className = 'event-row custom-event-row';
+    row.dataset.itemKey = itemKey;
+    row.dataset.dayId = dayId;
+    row.innerHTML = `
+      <div class="event-timeline"><div class="ev-dot" style="background:#8A8480"></div></div>
+      <div class="event-content">
+        ${item.time ? `<div class="event-time">${item.time}</div>` : ''}
+        <div class="event-title">${icon} ${item.name}</div>
+        ${item.desc ? `<div class="event-desc">${item.desc}</div>` : ''}
+        <div class="event-pills">
+          <button class="pill pill-check" data-key="${checkKey}" onclick="toggleCheck(event,this)">Marcar feito</button>
+        </div>
+      </div>
+      <button class="btn-remove-item" onclick="removeCustomItem('${dayId}','${itemKey}',this)">✕</button>`;
+    panel.insertBefore(row, addRow);
+    if (checkState[checkKey]) {
+      row.classList.add('done');
+      row.querySelector('.pill-check').classList.add('done');
+      row.querySelector('.pill-check').textContent = '✓ Feito';
+    }
+  }
+
+  function removeCustomItem(dayId, itemKey, btn) {
+    if (!confirm('Remover este item?')) return;
+    btn.closest('.event-row').remove();
+    updateProgress();
+    if (customRef) {
+      customRef.child(dayId).child(itemKey).remove();
+      if (checksRef) checksRef.child('custom_' + itemKey).remove();
+    } else { saveLocalCustom(); }
+  }
+
+  /* ── LOCAL STORAGE FALLBACK ── */
+  function saveLocalCustom() {
+    const items = {};
+    document.querySelectorAll('.custom-event-row').forEach(row => {
+      const dId = row.dataset.dayId, iKey = row.dataset.itemKey;
+      if (!items[dId]) items[dId] = {};
+      const title = row.querySelector('.event-title').textContent.replace(/^[^\w]*/, '').trim();
+      const desc  = row.querySelector('.event-desc')?.textContent || '';
+      const time  = row.querySelector('.event-time')?.textContent || '';
+      items[dId][iKey] = { name: title, desc, time, type: 'outro', ts: parseInt(iKey.replace('local_','')) || 0 };
+    });
+    try { localStorage.setItem('italia_custom', JSON.stringify(items)); } catch(e){}
+  }
+
+  function loadLocalFallback() {
+    try {
+      const checks = JSON.parse(localStorage.getItem('italia_checks') || '{}');
+      applyChecks(checks);
+      const custom = JSON.parse(localStorage.getItem('italia_custom') || '{}');
+      Object.entries(custom).forEach(([dayId, items]) => {
+        Object.entries(items).forEach(([key, item]) => renderCustomItem(dayId, key, item));
+      });
+      if (Object.keys(checks).length || Object.keys(custom).length) setSyncStatus('local');
+    } catch(e){}
+  }
+
+  /* ── INIT ── */
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.pill-check').forEach((btn, i) => {
+      btn.dataset.key = 'check_' + i;
+    });
+    injectAddButtons();
+    updateProgress();
+
+    if (checksRef) {
+      checksRef.on('value', snap => { applyChecks(snap.val() || {}); setSyncStatus('ok'); },
+                             () => setSyncStatus('offline'));
+    }
+    if (customRef) {
+      customRef.on('value', snap => {
+        document.querySelectorAll('.custom-event-row').forEach(r => r.remove());
+        const data = snap.val() || {};
+        Object.entries(data).forEach(([dayId, items]) => {
+          if (items) Object.entries(items).forEach(([k, v]) => renderCustomItem(dayId, k, v));
+        });
+        updateProgress();
+      });
+    } else {
+      loadLocalFallback();
+    }
+  });
+
+  window.addEventListener('online',  () => setSyncStatus(FIREBASE_ENABLED ? 'ok' : 'local'));
+  window.addEventListener('offline', () => setSyncStatus('offline'));
+</script>
+</body>
+</html>
